@@ -54,6 +54,8 @@ sympy==1.14.0
 tokenizers==0.21.2
 tomlkit==0.13.3
 torch==2.7.1
+torchaudio==2.7.1
+torchvision==0.22.1
 tqdm==4.67.1
 transformers==4.53.2
 typer==0.16.0
@@ -63,3 +65,4 @@ tzdata==2025.2
 urllib3==2.5.0
 uvicorn==0.35.0
 websockets==15.0.1
+wheel==0.45.1
