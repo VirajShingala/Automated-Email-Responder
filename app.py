@@ -3,9 +3,12 @@ from flask import Flask, render_template, request, redirect, url_for, session, s
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch
 import os
+from dotenv import load_dotenv
+
+load_dotenv()  # ✅ Load environment variables from .env
 
 app = Flask(__name__)
-app.secret_key = "supersecret"  # Replace in production!
+app.secret_key = os.environ.get("SECRET_KEY", "fallback-secret")
 
 # Load FLAN-T5 model
 tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")

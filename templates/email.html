@@ -1,0 +1,45 @@
+<!-- templates/email.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📧 Automated Email Responder</h1>
+        <form method="POST">
+            <label>Email Type:</label>
+            <select name="email_type">
+                <option>Apology</option>
+                <option>Request</option>
+                <option>Reminder</option>
+                <option>Appreciation</option>
+                <option>Notification</option>
+                <option>Follow-up</option>
+                <option>Custom</option>
+            </select>
+            <label>Prompt:</label>
+            <input type="text" name="prompt" placeholder="e.g. delay in submitting project" required><br>
+            <button type="submit">🚀 Generate Email</button>
+        </form>
+
+        {% if email %}
+        <h3>Generated Email</h3>
+        <textarea id="emailText" rows="12" readonly>{{ email }}</textarea><br>
+        <a href="{{ url_for('download') }}">⬇️ Download</a>
+        <button onclick="copyToClipboard()">📋 Copy</button>
+        {% endif %}
+        <br><br>
+        <a href="{{ url_for('logout') }}">🔒 Logout</a>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var copyText = document.getElementById("emailText");
+            navigator.clipboard.writeText(copyText.value);
+            alert("Copied to clipboard!");
+        }
+    </script>
+</body>
+</html>

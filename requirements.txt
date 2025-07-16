@@ -66,5 +66,6 @@ urllib3==2.5.0
 uvicorn==0.35.0
 websockets==15.0.1
 wheel==0.45.1
-fastapi
-uvicorn
+flask
+gunicorn
+python-dotenv
