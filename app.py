@@ -11,8 +11,8 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "fallback-secret")
 
 # Load FLAN-T5 model
-tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")
-model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-large")
+tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-small")
+model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-small")
 
 # Dummy login
 USERNAME = "admin@gmail.com"
