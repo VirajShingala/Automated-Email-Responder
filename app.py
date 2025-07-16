@@ -1,5 +1,6 @@
 import gradio as gr
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+import os
 
 # ✅ Load FLAN-T5 Large model
 tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")
@@ -81,5 +82,5 @@ with gr.Blocks(theme=gr.themes.Monochrome(), css="body { font-family: 'Segoe UI'
     logout_btn.click(fn=handle_logout, outputs=[login_section, email_section])
 
 # ✅ Launch app with public shareable link
-demo.launch(share=True)
-
+# demo.launch(share=True)
+demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 7860)))
