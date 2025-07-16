@@ -81,6 +81,10 @@ with gr.Blocks(theme=gr.themes.Monochrome(), css="body { font-family: 'Segoe UI'
     copy_btn.click(None, inputs=email_output, outputs=None, js="navigator.clipboard.writeText(arguments[0])")
     logout_btn.click(fn=handle_logout, outputs=[login_section, email_section])
 
-# ✅ Launch app with public shareable link
-# demo.launch(share=True)
-demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 7860)))
+# ✅ Launch app (Render-compatible)
+if __name__ == "__main__":
+    demo.queue()  # Optional, helps with handling concurrent requests
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("PORT", 7860))
+    )
