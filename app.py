@@ -1,13 +1,13 @@
 # app.py
+from fastapi import FastAPI
 import gradio as gr
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-import os
 
-# Load model
+# Load FLAN-T5 Large
 tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large")
 model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-large")
 
-# Dummy login logic
+# Email generation logic
 def check_login(username, password):
     return username == "admin@gmail.com" and password == "admin123"
 
@@ -69,17 +69,13 @@ with gr.Blocks(theme=gr.themes.Monochrome(), css="body { font-family: 'Segoe UI'
 
             email_file = gr.File(label="Download File", visible=True)
 
-    # Bind logic
+    # Bind buttons
     login_btn.click(fn=handle_login, inputs=[username, password], outputs=[login_section, email_section, login_msg])
     generate_btn.click(fn=generate_email, inputs=[email_type, prompt], outputs=email_output)
     download_btn.click(fn=save_email_to_file, inputs=email_output, outputs=email_file)
     copy_btn.click(None, inputs=email_output, outputs=None, js="navigator.clipboard.writeText(arguments[0])")
     logout_btn.click(fn=handle_logout, outputs=[login_section, email_section])
 
-# Launch the app (Render-ready)
-if __name__ == "__main__":
-    demo.queue()
-    demo.launch(
-        server_name="0.0.0.0",
-        server_port=int(os.environ.get("PORT", 7860))
-    )
+# ✅ Mount Gradio into FastAPI
+app = FastAPI()
+app = gr.mount_gradio_app(app, demo, path="/")

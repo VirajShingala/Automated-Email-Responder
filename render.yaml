@@ -3,7 +3,7 @@ services:
     name: gradio-email-app
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    startCommand: uvicorn app:app --host 0.0.0.0 --port 10000
     envVars:
       - key: TRANSFORMERS_CACHE
         value: /tmp/transformers
